@@ -73,7 +73,7 @@ st.markdown(
         color: #ffffff !important;  /* White text color */
         
         border-radius: 10px !important;  /* Rounded corners */
-        padding: 6px 10px !important;  /* Add padding */
+        padding: 10px !important;  /* Add padding */
         
        
     }
