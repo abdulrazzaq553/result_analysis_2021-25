@@ -68,7 +68,7 @@ st.markdown(
        font-size: 6px !important;  /* Smaller text */
         padding: 5px 8px !important;  /* Less padding */
         min-width: 60px !important;  /* Decrease width */
-        font-size: 8px !important;  /* Increase font size */
+        font-size: 4px !important;  /* Increase font size */
         font-weight: bold !important;  /* Make text bold */
         color: #ffffff !important;  /* White text color */
         
