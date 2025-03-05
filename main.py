@@ -66,7 +66,7 @@ st.markdown(
     div[data-testid="stTabs"] button {
         
        /* Adjust tab styles to fit on mobile */
-    div[data-baseweb="tab-list"] button {
+    
         font-size: 14px !important;  /* Reduce font size slightly */
         font-weight: bold !important;  /* Keep text bold */
         color: #ffffff !important;  /* White text color */
