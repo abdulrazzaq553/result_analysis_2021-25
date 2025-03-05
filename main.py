@@ -61,9 +61,9 @@ st.markdown(
     
     div[data-testid="stTabs"] button {
         
-       font-size: 12px !important;  /* Smaller text */
-        padding: 6px 10px !important;  /* Less padding */
-        min-width: 80px !important;  /* Decrease width */
+       font-size: 8px !important;  /* Smaller text */
+        padding: 3px 5px !important;  /* Less padding */
+        min-width: 40px !important;  /* Decrease width */
        
     }
     
