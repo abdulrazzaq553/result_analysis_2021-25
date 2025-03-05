@@ -61,10 +61,9 @@ st.markdown(
     
     div[data-testid="stTabs"] button {
         
-        font-weight: bold !important;  /* Make text bold */
-        color: #ffffff !important;  /* White text color */
-        background-color: #4CAF50 !important;  /* Green background */
-        border-radius: 10px !important;  /* Rounded corners */
+       font-size: 12px !important;  /* Smaller text */
+        padding: 6px 10px !important;  /* Less padding */
+        min-width: 80px !important;  /* Decrease width */
        
     }
     
