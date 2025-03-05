@@ -40,9 +40,13 @@ st.markdown(
     /* Sidebar Styling */
     @media (prefers-color-scheme: light) {
         [data-testid="stSidebar"] {
-            background-color: #f0f2f6 !important;
-            padding: 20px;
-            border-right: 3px solid #2e86c1;
+            font-size: 18px !important;  /* Increase font size */
+        font-weight: bold !important;  /* Make text bold */
+        color: #ffffff !important;  /* White text color */
+        background-color: #4CAF50 !important;  /* Green background */
+        border-radius: 10px !important;  /* Rounded corners */
+        padding: 10px !important;  /* Add padding */
+        margin: 3px !important;
         }
     }
     /* Dark Theme Sidebar */
