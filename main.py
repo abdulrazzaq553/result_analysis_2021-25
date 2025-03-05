@@ -60,13 +60,12 @@ st.markdown(
     }
     
     div[data-testid="stTabs"] button {
-        font-size: 18px !important;  /* Increase font size */
+        
         font-weight: bold !important;  /* Make text bold */
         color: #ffffff !important;  /* White text color */
         background-color: #4CAF50 !important;  /* Green background */
         border-radius: 10px !important;  /* Rounded corners */
-        padding: 10px !important;  /* Add padding */
-        margin: 3px !important;
+       
     }
     
     div[data-testid="stTabs"] button:hover {
@@ -97,7 +96,7 @@ total['Semester'].replace({'Winter Semester 2021-2022':'1st_Sem', 'Spring Semest
 total['gender'].replace({'F':'Female','M':'Male'}, inplace=True)
 
 # Streamlit App Layout
-st.title("🎓 Student Performance (BSCS 2021-25)")
+st.header("🎓 Student Performance (BSCS 2021-25)")
 st.markdown("**Dept. of Computer Science, UAF**")
 st.markdown("**This dashboard provides an analysis of student performance from the 1st to the 7th semester.**")
 st.subheader("⚙️ Filter Options 🔧")
