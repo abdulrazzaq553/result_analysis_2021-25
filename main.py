@@ -70,7 +70,7 @@ st.markdown(
         font-size: 14px !important;  /* Reduce font size slightly */
         font-weight: bold !important;  /* Keep text bold */
         color: #ffffff !important;  /* White text color */
-        background-color: #4CAF50 !important;  /* Green background */
+        
         border-radius: 8px !important;  /* Slightly rounded corners */
         padding: 6px 8px !important;  /* Reduce padding */
         margin: 2px !important;  /* Reduce margin */
