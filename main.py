@@ -68,6 +68,13 @@ st.markdown(
        font-size: 8px !important;  /* Smaller text */
         padding: 5px 8px !important;  /* Less padding */
         min-width: 60px !important;  /* Decrease width */
+        font-size: 8px !important;  /* Increase font size */
+        font-weight: bold !important;  /* Make text bold */
+        color: #ffffff !important;  /* White text color */
+        background-color: #4CAF50 !important;  /* Green background */
+        border-radius: 10px !important;  /* Rounded corners */
+        padding: 6px 10px !important;  /* Add padding */
+        
        
     }
     
