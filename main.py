@@ -562,7 +562,7 @@ with tab5:
             top_students1 = marks_data.sort_values(by='Marks', ascending=False).reset_index(drop=True)
             
             
-            grade_remove=top_students1.drop('gender',axis=1)
+            grade_remove=top_students1
             st.dataframe(grade_remove)
             
        
