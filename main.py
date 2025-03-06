@@ -553,7 +553,7 @@ with tab5:
                     mime="text/csv"
                 )
             else:
-                st.info("ℹ️ No extra course selected or available.")
+                st.info("ℹ️ No extra enroll course selected.")
 
         st.subheader(f"Top 10 Students in {select_course} 📊")
         fig, ax = plt.subplots(figsize=(10, 6))
