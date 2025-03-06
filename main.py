@@ -359,7 +359,7 @@ with tab4:
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
     Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
-    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="marks_semester")
+    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters)
     
     if selected_semester == 'All_Semesters':
         top_marks_students = get_top_marks_students(total)
@@ -541,7 +541,7 @@ with tab5:
                 total2 = sem_data[sem_data['Course'] == select_course1]
                 total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
                 st.subheader(f"Result of {select_course1} 🔍")
-                st.warning(f"⚠️ Note: This result includes only Those students who extra enroll  in {select_course1} during {sel1}.")
+                st.warning(f"⚠️ Note: This result includes only students who extra enrolledmin {select_course1} during {sel1}.")
                 st.dataframe(total2[['NAME', 'Marks', 'Grade']])
                 
                 # Download Button for Filtered Data
