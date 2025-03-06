@@ -126,7 +126,7 @@ with tab1:
     
     st.info("**Note:** This dashboard is for informational purposes only. For official records, please refer to the university LMS. 📚")
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
@@ -330,7 +330,7 @@ with tab6:
             mime="text/csv"
         )
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
@@ -415,7 +415,7 @@ with tab2:
             plt.legend([f"{label}: {value}" for label, value in zip(x, y)])
             st.pyplot(fig)
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
@@ -463,7 +463,7 @@ with tab3:
             plt.legend([f'{Label} => {Value}' for Label, Value in zip(x, y)], title="Students", loc="best", fontsize=12)
             st.pyplot(fig)
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
@@ -608,7 +608,7 @@ with tab4:
             grade_remove=overall.drop('gender',axis=1)
             st.dataframe(grade_remove)
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
