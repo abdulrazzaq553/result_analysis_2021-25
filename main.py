@@ -105,7 +105,7 @@ st.markdown("**Dept. of Computer Science, UAF**")
 st.markdown("**This dashboard provides an analysis of student performance from 1st to 7th semester.**")
 st.subheader("⚙️ Filter Options 🔧")
 st.markdown("🔖 Select a Tab to Explore 📊") 
-tab1, tab2, tab3, tab4, tab5,tab6 = st.tabs(["🏠 Home", 'Courses📚', "👤 Individual", "🏆 Top Grades", "📊 Top Marks","📈 Overall"])
+tab1, tab2, tab3, tab4, tab5,tab6 = st.tabs(["🏠 Home",  "👤 Individual",'Courses📚', "🏆 Top Grades", "📊 Top Marks","📈 Overall"])
 
 with tab1:
     st.subheader("Student Result Analysis Dashboard🎓")
