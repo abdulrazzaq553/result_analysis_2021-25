@@ -237,7 +237,7 @@ with tab2:
         
 
         choose_sem = st.radio("Select Semester 🗓️", ['Overall'] + total['Semester'].unique().tolist(), horizontal=True, key="individual_sem")
-        grades = st.radio("Filtered Resukt By Grades 🎯", ["All"] + filter_name['Grade'].unique().tolist(), horizontal=True, key="individual_grades")
+        grades = st.radio("Filter Result By Grades 🎯", ["All"] + filter_name['Grade'].unique().tolist(), horizontal=True, key="individual_grades")
         csv = filter_name.to_csv(index=False)
         st.download_button(
             label="📥 Download Filtered Data",
@@ -496,8 +496,8 @@ with tab4:
 # Courses Section
 with tab5:
     st.subheader("📚 Courses")
-    Choose_Semesters = ["Choose_Semester"] + total['Semester'].unique().tolist()
-    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesters)
+    Choose_Semesterss = ["Choose_Semester"] + total['Semester'].unique().tolist()
+    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
 
     if sel1 == 'Choose_Semester':
         st.warning("⚠️ Note: Please select a semester")
