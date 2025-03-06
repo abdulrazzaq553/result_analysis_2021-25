@@ -513,7 +513,7 @@ with tab5:
         select_course = st.radio("Select Course", main_courses, horizontal=True, key="main_course")
         if extra_courses:  # show extra courses only if there are any extra courses available
             st.warning(f"⚠️ Extra Enrolled Students also registered for these Courses in {sel1}:")
-            select_course1 = st.radio("Extra_Enroll_Course", ["None"] + extra_courses, index=0, horizontal=True, key="extra_course")
+            select_course1 = st.radio("Extra Enroll Course", ["None"] + extra_courses, index=0, horizontal=True, key="extra_course")
 
         col1, col2 = st.columns(2)
         with col1:
@@ -541,7 +541,7 @@ with tab5:
                 total2 = sem_data[sem_data['Course'] == select_course1]
                 total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
                 st.subheader(f"Result of {select_course1} 🔍")
-                st.warning(f"⚠️ Note: This result includes only students who extra enrolled in {select_course1} during {sel1}.")
+                st.warning(f"⚠️ Note: This result includes only Those students who enroll extra course in {select_course1} during {sel1}.")
                 st.dataframe(total2[['NAME', 'Marks', 'Grade']])
                 
                 # Download Button for Filtered Data
@@ -553,7 +553,8 @@ with tab5:
                     mime="text/csv"
                 )
             else:
-                st.info("ℹ️ No extra enroll course selected.")
+                st.info("ℹ️ No extra enrolled course selected. Please select a course above to view results.")
+
 
         st.subheader(f"Top 10 Students in {select_course} 📊")
         fig, ax = plt.subplots(figsize=(10, 6))
