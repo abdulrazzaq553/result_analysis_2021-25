@@ -443,8 +443,7 @@ with tab3:
     for grade in grades:
         if selected_semester == 'All_Semesters':
             top_students = get_top_students(total, grade)
-        elif selected_semester=='Choose Semester':
-            st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")   
+          
 
         else:
             sem_data = total[total['Semester'] == selected_semester]
