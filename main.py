@@ -110,7 +110,7 @@ tab1, tab2, tab3, tab4, tab5,tab6 = st.tabs(["🏠 Home",  "👤 Individual", "�
 with tab1:
     st.subheader("Student Result Analysis Dashboard🎓")
     st.markdown(""" =>This dashboard provides insights into the academic performance of BSCS Section-B (2021-25) students.
-    =>Use the tabs above to navigate through different sections and explore the results:
+    =>Use the tabs above to navigate through different sections and explore the Following results:
 
 - **👤 Individual:** Analyze the performance of individual students across all semesters or a specific semester. View marks, grades, and identify which semesters or courses have A's, B's, C's, and other grades.
 
