@@ -434,16 +434,17 @@ with tab3:
         top_students = grade_data['NAME'].value_counts().head(5).reset_index()
         top_students.columns = ['Student Name', f'{grade} Count']
         return top_students
-
-    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
-    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="top_grades_sem")
     st.markdown(
     '<div style="font-size:14px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
     '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
     '</div>', 
-    unsafe_allow_html=True
-)
+         unsafe_allow_html=True
+    )
 
+    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="top_grades_sem")
+    
+   
     st.info("ℹ️ Grades from both attempts (before and after course improvement-(Extra_enroll)) both are included in the calculation.")
 
     grades = ['A', 'B', 'C', 'D', 'F']
@@ -494,14 +495,15 @@ with tab4:
         return top_students
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
-    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
-    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters)
     st.markdown(
-    '<div style="font-size:14px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+    '<div style="font-size:10px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
     '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
     '</div>', 
     unsafe_allow_html=True
 )
+    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters)
+    
 
     
     if selected_semester == 'All_Semesters':
