@@ -631,9 +631,15 @@ with tab5:
             st.pyplot(fig)
 
             st.subheader(f"Overall Total Marks of {selected_semester}🏆")
+            razzaq = total_sem.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
+            marks_data = razzaq.groupby('NAME')['Marks'].sum().reset_index()
+            top_students1 = marks_data.sort_values(by='Marks', ascending=False).reset_index(drop=True)
             
-            grade_remove=overall.drop('gender',axis=1)
+            
+            grade_remove=top_students1
             st.dataframe(grade_remove)
+            
+            
     st.write("---")
     st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
