@@ -184,7 +184,7 @@ with tab5:
                 total2 = sem_data[sem_data['Course'] == select_course1]
                 total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
                 st.subheader(f"Result of {select_course1} 🔍")
-                st.warning(f"⚠️ Note: This result includes only students who extra enrolledmin {select_course1} during {sel1}.")
+                st.warning(f"⚠️ Note: This result includes only students who extra enrolled in {select_course1} during {sel1}.")
                 st.dataframe(total2[['NAME', 'Marks', 'Grade']])
                 
                 # Download Button for Filtered Data
@@ -386,7 +386,7 @@ with tab2:
         else:
             filter_name = filter_name[filter_name['Semester'] == choose_sem]
             st.warning("⚠️ Marks and grades from extra enrolled courses are also included in the calculation.")
-            st.subheader(f"Results for {Choose_Students} in {choose_sem} 🔎")
+            st.subheader(f"Results of {Choose_Students} in {choose_sem} 🔎")
             if grades == 'All':
                 filter_name=filter_name.drop('Registration NO',axis=1)
                 
@@ -430,11 +430,11 @@ with tab3:
     st.subheader("🏆 Top Grades")
     def get_top_students(data, grade):
         grade_data = data[data['Grade'] == grade]
-        top_students = grade_data['NAME'].value_counts().head(6).reset_index()
+        top_students = grade_data['NAME'].value_counts().head(5).reset_index()
         top_students.columns = ['Student Name', f'{grade} Count']
         return top_students
 
-    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    Choose_Semesters = ['Choose Semester']+['All_Semesters'] + sorted(total['Semester'].unique().tolist())
     selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="top_grades_sem")
     st.warning("⚠️ Grades from both attempts (before and after course improvement(Extra_enroll)) are included in the calculation.")
 
@@ -442,9 +442,11 @@ with tab3:
     for grade in grades:
         if selected_semester == 'All_Semesters':
             top_students = get_top_students(total, grade)
+        elif
         else:
             sem_data = total[total['Semester'] == selected_semester]
             top_students = get_top_students(sem_data, grade)
+            
 
         col1, col2 = st.columns(2)
         with col1:
