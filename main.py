@@ -136,6 +136,131 @@ with tab1:
     st.write("---")
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
+
+with tab5:
+    st.subheader("📚 Courses")
+    Choose_Semesterss = ["Choose_Semester"] + total['Semester'].unique().tolist()
+    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
+
+    if sel1 == 'Choose_Semester':
+        st.warning("⚠️ Note: Please select a semester")
+    else:
+        sem_data = total[total['Semester'] == sel1]
+        course_counts = sem_data['Course'].value_counts().reset_index(name='Count')
+        course_counts.rename(columns={'index': 'Course'}, inplace=True)
+
+        main_courses = course_counts['Course'][:6].tolist()
+        extra_courses = course_counts['Course'][6:].tolist()
+
+        st.subheader(f"Here are the Courses of {sel1} ✨")
+        select_course = st.radio("Select Course", main_courses, horizontal=True, key="main_course")
+        if extra_courses:  # show extra courses only if there are any extra courses available
+            st.warning(f"⚠️ Extra Enrolled Students also registered for these Courses in {sel1}:")
+            select_course1 = st.radio("Extra Enroll Course", ["None"] + extra_courses, index=0, horizontal=True, key="extra_course")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            # Filter and sort the main course results by Marks in descending order
+            total1 = sem_data[sem_data['Course'] == select_course]
+            total1 = total1.sort_values('Marks', ascending=False).reset_index(drop=True)
+            # Get top 12 students and top 10 subset for bar chart
+            top12_total1 = total1
+            top12_total2 = total1.head(10)
+            st.subheader(f"Result of {select_course} 🎓")
+            st.dataframe(top12_total1[['NAME', 'Marks', 'Grade']])
+            
+            # Download Button for Filtered Data (top 12)
+            csv = top12_total1.to_csv(index=False)
+            st.download_button(
+                label=f"📥 Download {select_course} Result",
+                data=csv,
+                file_name=f"{select_course}_top12_performance.csv",
+                mime="text/csv"
+            )
+
+        with col2:
+            # For the extra course, show the full sorted data
+            if extra_courses and select_course1 != "None":
+                total2 = sem_data[sem_data['Course'] == select_course1]
+                total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
+                st.subheader(f"Result of {select_course1} 🔍")
+                st.warning(f"⚠️ Note: This result includes only students who extra enrolledmin {select_course1} during {sel1}.")
+                st.dataframe(total2[['NAME', 'Marks', 'Grade']])
+                
+                # Download Button for Filtered Data
+                csv = total2.to_csv(index=False)
+                st.download_button(
+                    label=f"📥 Download {select_course1} Data",
+                    data=csv,
+                    file_name=f"{select_course1}_performance.csv",
+                    mime="text/csv"
+                )
+            else:
+                st.info("ℹ️ No extra enrolled course selected. Please select a course above to view results.")
+
+
+        st.subheader(f"Top 10 Students in {select_course} 📊")
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(data=top12_total2, x='NAME', y='Marks', palette='viridis', ax=ax)
+        plt.xticks(rotation=45, ha='right', fontsize=12)
+        plt.title("Marks of Top 10 Students", fontsize=16)
+        plt.xlabel("Student Name", fontsize=14)
+        plt.ylabel("Marks", fontsize=14)
+
+        # Annotate each bar with its value (marks)
+        for bar in ax.patches:
+            height = bar.get_height()
+            ax.annotate(f'{height:.0f}',
+                        (bar.get_x() + bar.get_width() / 2., height),
+                        ha='center', va='bottom', fontsize=12, color='black',
+                        xytext=(0, 5), textcoords='offset points')
+
+        st.pyplot(fig)
+
+        # Pie Chart for Grades for the main course
+        st.subheader(f"Grade Distribution in {select_course} 🎨")
+        col3, col4 = st.columns(2)
+        with col3:
+            grade_counts = top12_total1['Grade'].value_counts().reset_index()
+            grade_counts.columns = ['Grade', 'Count']
+            fig, ax = plt.subplots(figsize=(8, 8))
+            ax.pie(grade_counts['Count'], labels=grade_counts['Grade'], autopct='%0.1f%%', textprops={'fontsize': 20})
+            ax.set_title(f"Total Grades in {select_course}")
+            plt.legend([f"{label}:{value}" for label, value in zip(grade_counts['Grade'], grade_counts['Count'])])
+            st.pyplot(fig)
+        with col4:
+            st.dataframe(grade_counts)
+
+        # Line Plot for Marks (for the main course)
+        st.subheader(f"Marks of {select_course} 📈")
+        fig, ax = plt.subplots(figsize=(23, 8))
+        sns.lineplot(
+            data=top12_total1,
+            x='NAME',
+            y='Marks',
+            hue='gender',
+            marker='*',       # custom marker style
+            lw=3,             # thicker line for clarity
+            ax=ax   
+        )
+        plt.xticks(rotation=90, fontsize=20)
+        plt.yticks(fontsize=30)
+        plt.legend(fontsize=12)
+        plt.grid()
+        st.pyplot(fig)
+    st.write("---")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("""
+    **Let's Connect:**  
+    📧 [Email](mailto:arazzaq7789@gmail.com)  
+    **Feedback?**  
+    I'd love to hear from you! 💬
+    """)
+    st.write("---")
+    st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
+
+
+
 # Filter by
 with tab6:
     st.subheader("📈 Overall Performance")
@@ -494,127 +619,7 @@ with tab4:
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 # Courses Section
-with tab5:
-    st.subheader("📚 Courses")
-    Choose_Semesterss = ["Choose_Semester"] + total['Semester'].unique().tolist()
-    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
 
-    if sel1 == 'Choose_Semester':
-        st.warning("⚠️ Note: Please select a semester")
-    else:
-        sem_data = total[total['Semester'] == sel1]
-        course_counts = sem_data['Course'].value_counts().reset_index(name='Count')
-        course_counts.rename(columns={'index': 'Course'}, inplace=True)
-
-        main_courses = course_counts['Course'][:6].tolist()
-        extra_courses = course_counts['Course'][6:].tolist()
-
-        st.subheader(f"Here are the Courses of {sel1} ✨")
-        select_course = st.radio("Select Course", main_courses, horizontal=True, key="main_course")
-        if extra_courses:  # show extra courses only if there are any extra courses available
-            st.warning(f"⚠️ Extra Enrolled Students also registered for these Courses in {sel1}:")
-            select_course1 = st.radio("Extra Enroll Course", ["None"] + extra_courses, index=0, horizontal=True, key="extra_course")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            # Filter and sort the main course results by Marks in descending order
-            total1 = sem_data[sem_data['Course'] == select_course]
-            total1 = total1.sort_values('Marks', ascending=False).reset_index(drop=True)
-            # Get top 12 students and top 10 subset for bar chart
-            top12_total1 = total1
-            top12_total2 = total1.head(10)
-            st.subheader(f"Result of {select_course} 🎓")
-            st.dataframe(top12_total1[['NAME', 'Marks', 'Grade']])
-            
-            # Download Button for Filtered Data (top 12)
-            csv = top12_total1.to_csv(index=False)
-            st.download_button(
-                label=f"📥 Download {select_course} Result",
-                data=csv,
-                file_name=f"{select_course}_top12_performance.csv",
-                mime="text/csv"
-            )
-
-        with col2:
-            # For the extra course, show the full sorted data
-            if extra_courses and select_course1 != "None":
-                total2 = sem_data[sem_data['Course'] == select_course1]
-                total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
-                st.subheader(f"Result of {select_course1} 🔍")
-                st.warning(f"⚠️ Note: This result includes only students who extra enrolledmin {select_course1} during {sel1}.")
-                st.dataframe(total2[['NAME', 'Marks', 'Grade']])
-                
-                # Download Button for Filtered Data
-                csv = total2.to_csv(index=False)
-                st.download_button(
-                    label=f"📥 Download {select_course1} Data",
-                    data=csv,
-                    file_name=f"{select_course1}_performance.csv",
-                    mime="text/csv"
-                )
-            else:
-                st.info("ℹ️ No extra enrolled course selected. Please select a course above to view results.")
-
-
-        st.subheader(f"Top 10 Students in {select_course} 📊")
-        fig, ax = plt.subplots(figsize=(10, 6))
-        sns.barplot(data=top12_total2, x='NAME', y='Marks', palette='viridis', ax=ax)
-        plt.xticks(rotation=45, ha='right', fontsize=12)
-        plt.title("Marks of Top 10 Students", fontsize=16)
-        plt.xlabel("Student Name", fontsize=14)
-        plt.ylabel("Marks", fontsize=14)
-
-        # Annotate each bar with its value (marks)
-        for bar in ax.patches:
-            height = bar.get_height()
-            ax.annotate(f'{height:.0f}',
-                        (bar.get_x() + bar.get_width() / 2., height),
-                        ha='center', va='bottom', fontsize=12, color='black',
-                        xytext=(0, 5), textcoords='offset points')
-
-        st.pyplot(fig)
-
-        # Pie Chart for Grades for the main course
-        st.subheader(f"Grade Distribution in {select_course} 🎨")
-        col3, col4 = st.columns(2)
-        with col3:
-            grade_counts = top12_total1['Grade'].value_counts().reset_index()
-            grade_counts.columns = ['Grade', 'Count']
-            fig, ax = plt.subplots(figsize=(8, 8))
-            ax.pie(grade_counts['Count'], labels=grade_counts['Grade'], autopct='%0.1f%%', textprops={'fontsize': 20})
-            ax.set_title(f"Total Grades in {select_course}")
-            plt.legend([f"{label}:{value}" for label, value in zip(grade_counts['Grade'], grade_counts['Count'])])
-            st.pyplot(fig)
-        with col4:
-            st.dataframe(grade_counts)
-
-        # Line Plot for Marks (for the main course)
-        st.subheader(f"Marks of {select_course} 📈")
-        fig, ax = plt.subplots(figsize=(23, 8))
-        sns.lineplot(
-            data=top12_total1,
-            x='NAME',
-            y='Marks',
-            hue='gender',
-            marker='*',       # custom marker style
-            lw=3,             # thicker line for clarity
-            ax=ax   
-        )
-        plt.xticks(rotation=90, fontsize=20)
-        plt.yticks(fontsize=30)
-        plt.legend(fontsize=12)
-        plt.grid()
-        st.pyplot(fig)
-    st.write("---")
-    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
-    st.markdown("""
-    **Let's Connect:**  
-    📧 [Email](mailto:arazzaq7789@gmail.com)  
-    **Feedback?**  
-    I'd love to hear from you! 💬
-    """)
-    st.write("---")
-    st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 # Footer
 
