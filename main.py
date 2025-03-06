@@ -102,14 +102,15 @@ total['gender'].replace({'F':'Female','M':'Male'}, inplace=True)
 # Streamlit App Layout
 st.header("🎓 Student Performance (BSCS 2021-25)")
 st.markdown("**Dept. of Computer Science, UAF**")
-st.markdown("**This dashboard provides an analysis of student performance from the 1st to the 7th semester.**")
+st.markdown("**This dashboard provides an analysis of student performance from 1st to 7th semester.**")
 st.subheader("⚙️ Filter Options 🔧")
 st.markdown("🔖 Select a Tab to Explore 📊") 
 tab1, tab2, tab3, tab4, tab5,tab6 = st.tabs(["🏠 Home",  "👤 Individual", "🏆 Top Grades", "📊 Top Marks",'Courses📚',"📈 Overall"])
 
 with tab1:
     st.subheader("Student Result Analysis Dashboard🎓")
-    st.markdown(""" =>This dashboard provides insights into the academic performance of BSCS Section-B (2021-25) students. Use the tabs above to navigate through different sections and explore the results:
+    st.markdown(""" =>This dashboard provides insights into the academic performance of BSCS Section-B (2021-25) students.
+    =>Use the tabs above to navigate through different sections and explore the results:
 
 - **👤 Individual:** Analyze the performance of individual students across all semesters or a specific semester. View marks, grades, and identify which semesters or courses have A's, B's, C's, and other grades.
 
@@ -168,7 +169,7 @@ with tab6:
             )
 
     elif sel1 == 'Choose_Semester':
-        st.header('Please choose a semester 🚩')
+        st.info('Please choose a semester 🚩')
     else:
         total_filtered = total[total['Semester'] == sel1]
         st.subheader(f"Results for {sel1} 📝")
@@ -233,6 +234,10 @@ with tab2:
         st.dataframe(student_marks)
 
     # Download Button for Filtered Data
+        
+
+        choose_sem = st.radio("Select Semester 🗓️", ['Overall'] + total['Semester'].unique().tolist(), horizontal=True, key="individual_sem")
+        grades = st.radio("Filtered Resukt By Grades 🎯", ["All"] + filter_name['Grade'].unique().tolist(), horizontal=True, key="individual_grades")
         csv = filter_name.to_csv(index=False)
         st.download_button(
             label="📥 Download Filtered Data",
@@ -240,10 +245,6 @@ with tab2:
             file_name=f"{Choose_Students}_performance.csv",
             mime="text/csv"
         )
-
-        choose_sem = st.radio("Select Semester 🗓️", ['Overall'] + total['Semester'].unique().tolist(), horizontal=True, key="individual_sem")
-        grades = st.radio("Select Grades 🎯", ["All"] + filter_name['Grade'].unique().tolist(), horizontal=True, key="individual_grades")
-    
         if choose_sem == 'Overall':
             st.subheader(f"Results of {Choose_Students} (All Semesters) 🌐")
             st.warning("⚠️ Marks and grades from extra enrolled courses are also included in the calculation.")
@@ -251,17 +252,26 @@ with tab2:
                 sem_data = filter_name[filter_name['Semester'] == sem]
                 st.subheader(f"{sem} Results:")
                 if grades == 'All':
+                    sem_data=sem_data.drop('Registration NO',axis=1)
                     st.dataframe(sem_data)
                 else:
-                    st.dataframe(sem_data[sem_data['Grade'] == grades])
+                    sem_data=sem_data[sem_data['Grade'] == grades]
+                    sem_data=sem_data.drop('Registration NO',axis=1)
+                    st.dataframe(sem_data)
         else:
             filter_name = filter_name[filter_name['Semester'] == choose_sem]
             st.warning("⚠️ Marks and grades from extra enrolled courses are also included in the calculation.")
             st.subheader(f"Results for {Choose_Students} in {choose_sem} 🔎")
             if grades == 'All':
+                filter_name=filter_name.drop('Registration NO',axis=1)
+                
                 st.dataframe(filter_name)
             else:
-                st.dataframe(filter_name[filter_name['Grade'] == grades])
+                filter_name=filter_name[filter_name['Grade'] == grades]
+                
+                filter_name=filter_name.drop('Registration NO',axis=1)
+                st.dataframe(filter_name)
+                
 
     # Grades Count and Pie Chart
         st.subheader("Grades Overview 📊")
@@ -401,13 +411,15 @@ with tab4:
             st.pyplot(fig)
 
             st.subheader(f"Overall Total Marks of {selected_semester}🏆")
-            st.dataframe(overall)
+            
+            grade_remove=overall.drop('gender',axis=1)
+            st.dataframe(grade_remove)
     else:
         total_sem = total[total['Semester'] == selected_semester]
         top_marks_students = get_top_marks_students(total_sem)
         st.write(f"**Top 10 Students with Highest Marks in {selected_semester}:**")
         
-        st.warning(f"⚠️ Note: Marks of Extra Enrolled Courses in {selected_semester} are included in the Calculation.")
+        st.warning(f"⚠️ Note: Marks of Extra Enrolled Courses  in {selected_semester} are included in the Calculation.")
         st.dataframe(top_marks_students, use_container_width=True, height=250, key=f"top-marks-{selected_semester}")
 
     # Visualization
@@ -467,6 +479,7 @@ with tab4:
             st.pyplot(fig)
 
             st.subheader(f"Overall Total Marks of {selected_semester}🏆")
+            
             grade_remove=overall.drop('gender',axis=1)
             st.dataframe(grade_remove)
     st.write("---")
@@ -484,7 +497,7 @@ with tab4:
 with tab5:
     st.subheader("📚 Courses")
     Choose_Semesters = ["Choose_Semester"] + total['Semester'].unique().tolist()
-    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="courses_sem")
+    sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesters)
 
     if sel1 == 'Choose_Semester':
         st.warning("⚠️ Note: Please select a semester")
@@ -516,7 +529,7 @@ with tab5:
             # Download Button for Filtered Data (top 12)
             csv = top12_total1.to_csv(index=False)
             st.download_button(
-                label=f"📥 Download {select_course} Top 12 Data",
+                label=f"📥 Download {select_course} Result",
                 data=csv,
                 file_name=f"{select_course}_top12_performance.csv",
                 mime="text/csv"
