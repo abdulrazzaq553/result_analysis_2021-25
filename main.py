@@ -435,7 +435,7 @@ with tab3:
         top_students.columns = ['Student Name', f'{grade} Count']
         return top_students
     st.markdown(
-    '<div style="font-size:14px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+    '<div style="font-size:12px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
     '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
     '</div>', 
          unsafe_allow_html=True
@@ -496,7 +496,7 @@ with tab4:
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
     st.markdown(
-    '<div style="font-size:10px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+    '<div style="font-size:12px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
     '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
     '</div>', 
     unsafe_allow_html=True
