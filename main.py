@@ -541,7 +541,7 @@ with tab5:
                 total2 = sem_data[sem_data['Course'] == select_course1]
                 total2 = total2.sort_values('Marks', ascending=False).reset_index(drop=True)
                 st.subheader(f"Result of {select_course1} 🔍")
-                st.warning(f"⚠️ Note: This result includes only Those students who enroll extra course in {select_course1} during {sel1}.")
+                st.warning(f"⚠️ Note: This result includes only Those students who extra enroll  in {select_course1} during {sel1}.")
                 st.dataframe(total2[['NAME', 'Marks', 'Grade']])
                 
                 # Download Button for Filtered Data
@@ -606,7 +606,7 @@ with tab5:
         plt.grid()
         st.pyplot(fig)
     st.write("---")
-    st.markdown("#### Developed with 💜 by *Abdul Razzaq 🏴*")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
