@@ -143,7 +143,7 @@ with tab5:
     sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
 
     if sel1 == 'Choose_Semester':
-        st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")  
+        st.warning("⚠️  Please choose a semester from the dropdown to view the performance.")  
 
     else:
         sem_data = total[total['Semester'] == sel1]
@@ -347,7 +347,7 @@ with tab2:
     st.subheader("👤 Individual Student Performance")
     Choose_Students = st.selectbox("Select Student 🌟",["Choose Your Name"]+total['NAME'].unique().tolist(), key="individual_select")
     if Choose_Students=='Choose Your Name':
-        st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")  
+        st.warning("⚠️  Please choose a semester from the dropdown to view the performance.")  
     else:
 
         razzaq = total.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
@@ -435,9 +435,16 @@ with tab3:
         top_students.columns = ['Student Name', f'{grade} Count']
         return top_students
 
-    Choose_Semesters = ['Choose Semester']+['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
     selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="top_grades_sem")
-    st.warning("⚠️ Grades from both attempts (before and after course improvement-(Extra_enroll)) both are included in the calculation.")
+    st.markdown(
+    '<div style="font-size:14px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+    '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
+    '</div>', 
+    unsafe_allow_html=True
+)
+
+    st.info("ℹ️ Grades from both attempts (before and after course improvement-(Extra_enroll)) both are included in the calculation.")
 
     grades = ['A', 'B', 'C', 'D', 'F']
     for grade in grades:
@@ -487,8 +494,15 @@ with tab4:
         return top_students
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
-    Choose_Semesters = ["Choose_Semester"]+['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
     selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters)
+    st.markdown(
+    '<div style="font-size:14px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+    '⚠️ Please choose a semester from the dropdown to view performance semester-wise.'
+    '</div>', 
+    unsafe_allow_html=True
+)
+
     
     if selected_semester == 'All_Semesters':
         top_marks_students = get_top_marks_students(total)
