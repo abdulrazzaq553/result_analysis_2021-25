@@ -493,6 +493,7 @@ with tab5:
         top_students1 = marks_data.sort_values(by='Marks', ascending=False).reset_index(drop=True)
         top_students = marks_data.sort_values(by='Marks', ascending=False).head(11).reset_index(drop=True)
         return top_students
+        
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
     st.markdown(
@@ -556,8 +557,12 @@ with tab5:
             st.pyplot(fig)
 
             st.subheader(f"Overall Total Marks of {selected_semester}🏆")
+            razzaq = total.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
+            marks_data = razzaq.groupby('NAME')['Marks'].sum().reset_index()
+            top_students1 = marks_data.sort_values(by='Marks', ascending=False).reset_index(drop=True)
             
-            grade_remove=overall.drop('gender',axis=1)
+            
+            grade_remove=top_students1.drop('gender',axis=1)
             st.dataframe(grade_remove)
             
        
@@ -644,4 +649,3 @@ with tab5:
 
 
 # Footer
-
