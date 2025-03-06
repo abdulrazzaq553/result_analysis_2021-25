@@ -126,7 +126,7 @@ with tab1:
     
     st.info("**Note:** This dashboard is for informational purposes only. For official records, please refer to the university LMS. 📚")
     st.write("---")
-    st.markdown("**###### Developed with 💜 by *Abdul Razzaq 🏴***")
+    st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
     **Let's Connect:**  
     📧 [Email](mailto:arazzaq7789@gmail.com)  
