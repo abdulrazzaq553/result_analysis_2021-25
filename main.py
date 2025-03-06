@@ -460,7 +460,7 @@ with tab3:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.write(f"**Top 6 Students with Most {grade}'s in {selected_semester}** ⭐")
+            st.write(f"**Top 5 Students with Most {grade}'s in {selected_semester}** ⭐")
             st.dataframe(top_students)
         with col2:
             fig, ax = plt.subplots(figsize=(8, 8))
