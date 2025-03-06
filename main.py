@@ -143,7 +143,8 @@ with tab5:
     sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
 
     if sel1 == 'Choose_Semester':
-        st.warning("⚠️ Note: Please select a semester")
+        st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")  
+
     else:
         sem_data = total[total['Semester'] == sel1]
         course_counts = sem_data['Course'].value_counts().reset_index(name='Count')
@@ -294,7 +295,7 @@ with tab6:
             )
 
     elif sel1 == 'Choose_Semester':
-        st.info('Please choose a semester 🚩')
+        st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.") 
     else:
         total_filtered = total[total['Semester'] == sel1]
         st.subheader(f"Results for {sel1} 📝")
@@ -346,7 +347,7 @@ with tab2:
     st.subheader("👤 Individual Student Performance")
     Choose_Students = st.selectbox("Select Student 🌟",["Choose Your Name"]+total['NAME'].unique().tolist(), key="individual_select")
     if Choose_Students=='Choose Your Name':
-        st.info("Please choose a student's name from the dropdown to view their performance.")
+        st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")  
     else:
 
         razzaq = total.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
@@ -436,14 +437,15 @@ with tab3:
 
     Choose_Semesters = ['Choose Semester']+['All_Semesters'] + sorted(total['Semester'].unique().tolist())
     selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters, key="top_grades_sem")
-    st.warning("⚠️ Grades from both attempts (before and after course improvement(Extra_enroll)) are included in the calculation.")
+    st.warning("⚠️ Grades from both attempts (before and after course improvement-(Extra_enroll)) both are included in the calculation.")
 
     grades = ['A', 'B', 'C', 'D', 'F']
     for grade in grades:
         if selected_semester == 'All_Semesters':
             top_students = get_top_students(total, grade)
-        elif selected_semester=='Choose_Semester':
-            st.info('Please choose a semester 🚩')
+        elif selected_semester=='Choose Semester':
+            st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")   
+
         else:
             sem_data = total[total['Semester'] == selected_semester]
             top_students = get_top_students(sem_data, grade)
@@ -544,7 +546,7 @@ with tab4:
             st.dataframe(grade_remove)
             
     elif selected_semester=='Choose_Semester':
-            st.info('Please choose a semester 🚩')
+            st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")   
     else:
         total_sem = total[total['Semester'] == selected_semester]
         top_marks_students = get_top_marks_students(total_sem)
