@@ -545,8 +545,7 @@ with tab4:
             grade_remove=overall.drop('gender',axis=1)
             st.dataframe(grade_remove)
             
-    elif selected_semester=='Choose_Semester':
-            st.warning("ℹ️ Please choose a semester from the dropdown to view the performance.")   
+       
     else:
         total_sem = total[total['Semester'] == selected_semester]
         top_marks_students = get_top_marks_students(total_sem)
