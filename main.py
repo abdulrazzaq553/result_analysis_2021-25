@@ -137,7 +137,7 @@ with tab1:
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 
-with tab5:
+with tab2:
     st.subheader("📚 Courses")
     Choose_Semesterss = ["Choose_Semester"] + total['Semester'].unique().tolist()
     sel1 = st.selectbox("Select Semester 🗓️", Choose_Semesterss)
@@ -342,7 +342,7 @@ with tab6:
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 # Individual Section
-with tab2:
+with tab3:
     
     st.subheader("👤 Individual Student Performance")
     Choose_Students = st.selectbox("Select Student 🌟",["Choose Your Name"]+total['NAME'].unique().tolist(), key="individual_select")
@@ -427,7 +427,7 @@ with tab2:
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 # Top Grades Section
-with tab3:
+with tab4:
     st.subheader("🏆 Top Grades")
     def get_top_students(data, grade):
         grade_data = data[data['Grade'] == grade]
@@ -486,7 +486,7 @@ with tab3:
     st.markdown('<style> div[data-baseweb="select"] > div { color: red !important; } </style>', unsafe_allow_html=True)
 
 # Top Marks Section
-with tab4:
+with tab5:
     def get_top_marks_students(data):
         razzaq = data.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
         marks_data = razzaq.groupby('NAME')['Marks'].sum().reset_index()
