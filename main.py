@@ -442,7 +442,8 @@ with tab3:
     for grade in grades:
         if selected_semester == 'All_Semesters':
             top_students = get_top_students(total, grade)
-        elif
+        elif selected_semester=='Choose_Semester':
+            st.info('Please choose a semester 🚩')
         else:
             sem_data = total[total['Semester'] == selected_semester]
             top_students = get_top_students(sem_data, grade)
@@ -485,7 +486,7 @@ with tab4:
         return top_students
 
     st.subheader("📊 Top 10 Students with Highest Total Marks")
-    Choose_Semesters = ['All_Semesters'] + sorted(total['Semester'].unique().tolist())
+    Choose_Semesters = ["Choose_Semester"]+['All_Semesters'] + sorted(total['Semester'].unique().tolist())
     selected_semester = st.selectbox("Select Semester 🗓️", Choose_Semesters)
     
     if selected_semester == 'All_Semesters':
@@ -541,6 +542,9 @@ with tab4:
             
             grade_remove=overall.drop('gender',axis=1)
             st.dataframe(grade_remove)
+            
+    elif selected_semester=='Choose_Semester':
+            st.info('Please choose a semester 🚩')
     else:
         total_sem = total[total['Semester'] == selected_semester]
         top_marks_students = get_top_marks_students(total_sem)
