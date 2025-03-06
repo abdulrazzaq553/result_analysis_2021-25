@@ -347,7 +347,7 @@ with tab2:
     st.subheader("👤 Individual Student Performance")
     Choose_Students = st.selectbox("Select Student 🌟",["Choose Your Name"]+total['NAME'].unique().tolist(), key="individual_select")
     if Choose_Students=='Choose Your Name':
-        st.warning("⚠️  Please choose a semester from the dropdown to view the performance.")  
+        st.warning("⚠️ Please choose a student's name from the dropdown to view their performance.")  
     else:
 
         razzaq = total.drop_duplicates(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep='last')
