@@ -384,6 +384,22 @@ with tab2:
                     sem_data=sem_data[sem_data['Grade'] == grades]
                     sem_data=sem_data.drop('Registration NO',axis=1)
                     st.dataframe(sem_data)
+        elif choose_sem=='Extra Enroll Courses':
+            filter_name = total[total['NAME'] == Choose_Students].reset_index(drop=True)
+            abdul = filter_name[filter_name.duplicated(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep=False)].sort_values('Course').reset_index(drop=True)
+            st.markdown(f"### Extra Enroll Course of {Choose_Students}")
+            if abdul.empty:
+                st.error(f"✅ {Choose_Students} has not enrolled in any extra courses.")  # Message when no extra enrollment is found
+            else:
+
+                st.markdown(
+                '<div style="font-size:12px; color:#856404; background-color:#fff3cd; padding:10px; border-radius:5px;">'
+                 '⚠️ Previous and After improved course,both are included in course wise".'
+                '</div>', 
+                unsafe_allow_html=True
+                 )
+            
+                st.dataframe(abdul)
         else:
             filter_name = filter_name[filter_name['Semester'] == choose_sem]
             st.warning("⚠️ Marks and grades from extra enrolled courses are also included in the calculation.")
