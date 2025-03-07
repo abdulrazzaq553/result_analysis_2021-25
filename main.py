@@ -362,7 +362,7 @@ with tab2:
     # Download Button for Filtered Data
         
 
-        choose_sem = st.radio("Select Semester 🗓️", ['Overall'] + total['Semester'].unique().tolist(), horizontal=True, key="individual_sem")
+        choose_sem = st.radio("Select Semester 🗓️", ['Overall'] + total['Semester'].unique().tolist()+["Extra Enroll Courses"], horizontal=True, key="individual_sem")
         grades = st.radio("Filter Result By Grades 🎯", ["All"] + filter_name['Grade'].unique().tolist(), horizontal=True, key="individual_grades")
         csv = filter_name.to_csv(index=False)
         st.download_button(
