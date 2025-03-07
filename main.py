@@ -384,6 +384,25 @@ with tab2:
                     sem_data=sem_data[sem_data['Grade'] == grades]
                     sem_data=sem_data.drop('Registration NO',axis=1)
                     st.dataframe(sem_data)
+            st.subheader("Grades Overview 📊")
+            st.warning("⚠️ Grades from both attempts (before and after course improvement(Extra_enroll))  are included in the calculation.")
+            col1, col2 = st.columns(2)
+            with col1:
+                grade_counts = filter_name['Grade'].value_counts().reset_index()
+                grade_counts.columns = ['Grade', 'Count']
+                st.dataframe(grade_counts)
+            with col2:
+                fig, ax = plt.subplots(figsize=(8, 8))
+                x = grade_counts['Grade']
+                y = grade_counts['Count']
+                ax.pie(grade_counts['Count'], labels=grade_counts['Grade'], autopct='%0.1f%%', textprops={'fontsize': 20})
+                ax.set_title(f"Grade Distribution for {Choose_Students} 🎨")
+                plt.legend([f"{label}: {value}" for label, value in zip(x, y)])
+                st.pyplot(fig)
+
+
+
+        
         elif choose_sem=='Extra Enroll Courses':
             filter_name = total[total['NAME'] == Choose_Students].reset_index(drop=True)
             abdul = filter_name[filter_name.duplicated(subset=['Registration NO', 'NAME', 'gender', 'Course'], keep=False)].sort_values('Course').reset_index(drop=True)
@@ -416,23 +435,30 @@ with tab2:
                 filter_name=filter_name.drop('Registration NO',axis=1)
                 st.dataframe(filter_name)
                 
+            st.subheader("Grades Overview 📊")
+            st.warning("⚠️ Grades from both attempts (before and after course improvement(Extra_enroll))  are included in the calculation.")
+            col1, col2 = st.columns(2)
+            with col1:
+                grade_counts = filter_name['Grade'].value_counts().reset_index()
+                grade_counts.columns = ['Grade', 'Count']
+                st.dataframe(grade_counts)
+            with col2:
+                fig, ax = plt.subplots(figsize=(8, 8))
+                x = grade_counts['Grade']
+                y = grade_counts['Count']
+                ax.pie(grade_counts['Count'], labels=grade_counts['Grade'], autopct='%0.1f%%', textprops={'fontsize': 20})
+                ax.set_title(f"Grade Distribution for {Choose_Students} 🎨")
+                plt.legend([f"{label}: {value}" for label, value in zip(x, y)])
+                st.pyplot(fig)
+
+    
+
+    
+          
+                
 
     # Grades Count and Pie Chart
-        st.subheader("Grades Overview 📊")
-        st.warning("⚠️ Grades from both attempts (before and after course improvement(Extra_enroll))  are included in the calculation.")
-        col1, col2 = st.columns(2)
-        with col1:
-            grade_counts = filter_name['Grade'].value_counts().reset_index()
-            grade_counts.columns = ['Grade', 'Count']
-            st.dataframe(grade_counts)
-        with col2:
-            fig, ax = plt.subplots(figsize=(8, 8))
-            x = grade_counts['Grade']
-            y = grade_counts['Count']
-            ax.pie(grade_counts['Count'], labels=grade_counts['Grade'], autopct='%0.1f%%', textprops={'fontsize': 20})
-            ax.set_title(f"Grade Distribution for {Choose_Students} 🎨")
-            plt.legend([f"{label}: {value}" for label, value in zip(x, y)])
-            st.pyplot(fig)
+           
     st.write("---")
     st.markdown("###### Developed with 💜 by *Abdul Razzaq 🏴*")
     st.markdown("""
