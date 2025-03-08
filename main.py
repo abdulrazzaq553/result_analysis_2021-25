@@ -246,7 +246,7 @@ with tab3:
         )
         plt.xticks(rotation=90, fontsize=20)
         plt.yticks(fontsize=30)
-        plt.legend(fontsize=12)
+        plt.legend(fontsize=32)
         plt.grid()
         st.pyplot(fig)
     st.write("---")
